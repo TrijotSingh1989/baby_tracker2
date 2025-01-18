@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button-container a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 15px 30px;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Baby Events</h1>
+    <div class="button-container">
+        <a href="{% url 'add_event' 'sleep' %}">Add Sleep Event</a>
+        <a href="{% url 'add_event' 'feed' %}">Add Feed Event</a>
+        <a href="{% url 'add_event' 'poop' %}">Add Poop Event</a>
+        <a href="{% url 'add_event' 'diaper_change' %}">Add Diaper Change Event</a>
+    </div>
+    <ul>
+        {% for event in events %}
+            <li>{{ event.event_type|capfirst }} at {{ event.event_time }} {% if event.duration %}(Duration: {{ event.duration }}){% endif %}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
